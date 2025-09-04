@@ -109,8 +109,14 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleSubmit =  () => {
-    window.location.href = '/';
+  const handleSubmit = (values: any) => {
+    console.log(values);
+    if (type === 'account') {
+      window.location.href = '/';
+    }else{
+      window.location.href = '/user/merchant';
+    }
+
   };
   const { status, type: loginType } = userLoginState;
 
@@ -147,7 +153,7 @@ const Login: React.FC = () => {
             autoLogin: true,
           }}
           onFinish={async (values) => {
-            await handleSubmit();
+            await handleSubmit(values);
           }}
         >
           <Tabs
@@ -233,7 +239,7 @@ const Login: React.FC = () => {
             <LoginMessage content="验证码错误" />
           )}
           {type === 'mobile' && (
-             <>
+            <>
               <ProFormText
                 name="username"
                 fieldProps={{

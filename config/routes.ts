@@ -22,6 +22,12 @@ export default [
         component: './user/login',
       },
       {
+        path: '/user/merchant',
+        layout: false,
+        name: 'MerchantPage',
+        component: './merchant/MerchantPage',
+      },
+      {
         path: '/user',
         redirect: '/user/login',
       },
