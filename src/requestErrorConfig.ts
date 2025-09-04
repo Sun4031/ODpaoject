@@ -88,14 +88,14 @@ export const errorConfig: RequestConfig = {
   // 请求拦截器
   requestInterceptors: [
     (config: RequestOptions) => {
-      // 拦截请求配置，进行个性化处理。
-      const url = config?.url;
+      const version = config.version || 'v1';
+      //接口地址后缀默认为v1，其他的话在请求配置时默认携带 version: 'v2 || v3',
       config.headers = {
-      ...config.headers, // 保留已有的 headers
-      'authorization-type': 'BASIC_AUTH', // 添加自定义请求头
-    };
-      
-      return { ...config, url };
+        ...config.headers, // 保留已有的 headers
+        'authorization-type': 'BASIC_AUTH', // 添加自定义请求头
+      };
+      config.url = `/${version}${config.url}`;
+      return { ...config };
     },
   ],
 
