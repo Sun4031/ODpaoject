@@ -12,31 +12,43 @@
  */
 export default [
   {
-    path: "/user",
+    path: "/login",
     layout: false,
-    routes: [
-      {
-        path: "/user/login",
-        layout: false,
-        name: "login",
-        component: "./user/login",
-      },
-      {
-        path: "/user/merchant",
-        layout: false,
-        name: "MerchantPage",
-        component: "./merchant/MerchantPage",
-      },
-      {
-        path: "/user",
-        redirect: "/user/login",
-      },
-      {
-        component: "404",
-        path: "/user/*",
-      },
-    ],
+    name: "login",
+    component: "./login/LoginPage",
   },
+  {
+    path: "/merchant",
+    layout: false,
+    name: "MerchantPage",
+    component: "./merchant/MerchantPage",
+  },
+  // {
+  //   path: "/user",
+  //   layout: false,
+  //   routes: [
+  //     {
+  //       path: "/user/login",
+  //       layout: false,
+  //       name: "login",
+  //       component: "./login/LoginPage",
+  //     },
+  //     {
+  //       path: "/user/merchant",
+  //       layout: false,
+  //       name: "MerchantPage",
+  //       component: "./merchant/MerchantPage",
+  //     },
+  //     {
+  //       path: "/user",
+  //       redirect: "/user/login",
+  //     },
+  //     {
+  //       component: "404",
+  //       path: "/user/*",
+  //     },
+  //   ],
+  // },
   {
     name: "集团管理",
     icon: "dashboard",

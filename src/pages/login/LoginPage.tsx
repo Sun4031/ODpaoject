@@ -1,15 +1,9 @@
 import {
-  AlipayCircleOutlined,
   LockOutlined,
-  MobileOutlined,
-  TaobaoCircleOutlined,
   UserOutlined,
-  WeiboCircleOutlined,
 } from '@ant-design/icons';
 import {
   LoginForm,
-  ProFormCaptcha,
-  ProFormCheckbox,
   ProFormText,
 } from '@ant-design/pro-components';
 import {
@@ -24,9 +18,7 @@ import { Alert, App, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
 import React, { useState } from 'react';
 import { flushSync } from 'react-dom';
-import { login } from '@/services/ant-design-pro/api';
-import { getFakeCaptcha } from '@/services/ant-design-pro/login';
-import Settings from '../../../../config/defaultSettings';
+import Settings from '../../../config/defaultSettings';
 
 const useStyles = createStyles(({ token }) => {
   return {
@@ -114,7 +106,7 @@ const Login: React.FC = () => {
     if (type === 'account') {
       window.location.href = '/group';
     }else{
-      window.location.href = '/user/merchant';
+      window.location.href = '/merchant';
     }
 
   };
