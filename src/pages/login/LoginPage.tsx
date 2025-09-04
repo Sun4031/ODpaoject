@@ -13,7 +13,7 @@ import {
   useIntl,
   useModel,
 } from '@umijs/max';
-import { LoginByAdmin, LoginByBusiness } from '@/services/login';
+import { loginByAdmin,loginByBusiness } from '@/services/login';
 import LogoPng from '@/assets/image/logo.png'
 import { Alert, App, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
@@ -104,12 +104,12 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (values: any) => {
     if (type === 'account') {
-      LoginByAdmin({ ...values }).then((res) => {
+      loginByAdmin({ ...values }).then((res) => {
         console.log(res);
       })
       // window.location.href = '/group';
     } else {
-      LoginByBusiness({ ...values }).then((res) => {
+      loginByBusiness({ ...values }).then((res) => {
         console.log(res);
       })
       // window.location.href = '/merchant';
