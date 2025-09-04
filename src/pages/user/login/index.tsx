@@ -112,7 +112,7 @@ const Login: React.FC = () => {
   const handleSubmit = (values: any) => {
     console.log(values);
     if (type === 'account') {
-      window.location.href = '/';
+      window.location.href = '/group';
     }else{
       window.location.href = '/user/merchant';
     }

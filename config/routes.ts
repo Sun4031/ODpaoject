@@ -12,263 +12,90 @@
  */
 export default [
   {
-    path: '/user',
+    path: "/user",
     layout: false,
     routes: [
       {
-        path: '/user/login',
+        path: "/user/login",
         layout: false,
-        name: 'login',
-        component: './user/login',
+        name: "login",
+        component: "./user/login",
       },
       {
-        path: '/user/merchant',
+        path: "/user/merchant",
         layout: false,
-        name: 'MerchantPage',
-        component: './merchant/MerchantPage',
+        name: "MerchantPage",
+        component: "./merchant/MerchantPage",
       },
       {
-        path: '/user',
-        redirect: '/user/login',
+        path: "/user",
+        redirect: "/user/login",
       },
       {
-        name: 'register-result',
-        icon: 'smile',
-        path: '/user/register-result',
-        component: './user/register-result',
-      },
-      {
-        name: 'register',
-        icon: 'smile',
-        path: '/user/register',
-        component: './user/register',
-      },
-      {
-        component: '404',
-        path: '/user/*',
+        component: "404",
+        path: "/user/*",
       },
     ],
   },
   {
-    path: '/dashboard',
-    name: 'dashboard',
-    icon: 'dashboard',
+    name: "集团管理",
+    icon: "dashboard",
+    path: "/group",
+    component: "./groupManagement/GroupManagementPage",
+  },
+  {
+    name: "此账号",
+    icon: "dashboard",
+    path: "/account",
+    component: "./thisAccount/ThisAccountPage",
+  },
+  {
+    name: "被删除的资源",
+    icon: "dashboard",
+    path: "/recycleBin",
+    component: "./recycleBin/RecycleBinPage",
+  },
+  {
+    name: "客户管理",
+    icon: "dashboard",
+    path: "/customer",
+    component: "./customerManagement/CustomerPage",
+  },
+  {
+    path: "/setting",
+    name: "设置",
+    icon: "dashboard",
     routes: [
       {
-        path: '/dashboard',
-        redirect: '/dashboard/analysis',
+        path: "/setting",
+        redirect: "/setting/basicSetting",
       },
       {
-        name: 'analysis',
-        icon: 'smile',
-        path: '/dashboard/analysis',
-        component: './dashboard/analysis',
+        name: "基础设置",
+        icon: "smile",
+        path: "/setting/basicSetting",
+        component: "./settingMoudle/BasicSettings",
       },
-      // {
-      //   name: 'monitor',
-      //   icon: 'smile',
-      //   path: '/dashboard/monitor',
-      //   component: './dashboard/monitor',
-      // },
-      // {
-      //   name: 'workplace',
-      //   icon: 'smile',
-      //   path: '/dashboard/workplace',
-      //   component: './dashboard/workplace',
-      // },
+      {
+        name: "Viva Wallet 设置",
+        icon: "smile",
+        path: "/setting/vivawallet",
+        component: "./settingMoudle/VivaWallet",
+      },
+      {
+        name: "Whats App 设置",
+        icon: "smile",
+        path: "/setting/whatsapp",
+        component: "./settingMoudle/WhatsApp",
+      },
     ],
   },
-  // {
-  //   path: '/form',
-  //   icon: 'form',
-  //   name: 'form',
-  //   routes: [
-  //     {
-  //       path: '/form',
-  //       redirect: '/form/basic-form',
-  //     },
-  //     {
-  //       name: 'basic-form',
-  //       icon: 'smile',
-  //       path: '/form/basic-form',
-  //       component: './form/basic-form',
-  //     },
-  //     {
-  //       name: 'step-form',
-  //       icon: 'smile',
-  //       path: '/form/step-form',
-  //       component: './form/step-form',
-  //     },
-  //     {
-  //       name: 'advanced-form',
-  //       icon: 'smile',
-  //       path: '/form/advanced-form',
-  //       component: './form/advanced-form',
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/list',
-  //   icon: 'table',
-  //   name: 'list',
-  //   routes: [
-  //     {
-  //       path: '/list/search',
-  //       name: 'search-list',
-  //       component: './list/search',
-  //       routes: [
-  //         {
-  //           path: '/list/search',
-  //           redirect: '/list/search/articles',
-  //         },
-  //         {
-  //           name: 'articles',
-  //           icon: 'smile',
-  //           path: '/list/search/articles',
-  //           component: './list/search/articles',
-  //         },
-  //         {
-  //           name: 'projects',
-  //           icon: 'smile',
-  //           path: '/list/search/projects',
-  //           component: './list/search/projects',
-  //         },
-  //         {
-  //           name: 'applications',
-  //           icon: 'smile',
-  //           path: '/list/search/applications',
-  //           component: './list/search/applications',
-  //         },
-  //       ],
-  //     },
-  //     {
-  //       path: '/list',
-  //       redirect: '/list/table-list',
-  //     },
-  //     {
-  //       name: 'table-list',
-  //       icon: 'smile',
-  //       path: '/list/table-list',
-  //       component: './table-list',
-  //     },
-  //     {
-  //       name: 'basic-list',
-  //       icon: 'smile',
-  //       path: '/list/basic-list',
-  //       component: './list/basic-list',
-  //     },
-  //     {
-  //       name: 'card-list',
-  //       icon: 'smile',
-  //       path: '/list/card-list',
-  //       component: './list/card-list',
-  //     },
-  //   ],
-  // },
-  // {
-  //   path: '/profile',
-  //   name: 'profile',
-  //   icon: 'profile',
-  //   routes: [
-  //     {
-  //       path: '/profile',
-  //       redirect: '/profile/basic',
-  //     },
-  //     {
-  //       name: 'basic',
-  //       icon: 'smile',
-  //       path: '/profile/basic',
-  //       component: './profile/basic',
-  //     },
-  //     {
-  //       name: 'advanced',
-  //       icon: 'smile',
-  //       path: '/profile/advanced',
-  //       component: './profile/advanced',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'result',
-  //   icon: 'CheckCircleOutlined',
-  //   path: '/result',
-  //   routes: [
-  //     {
-  //       path: '/result',
-  //       redirect: '/result/success',
-  //     },
-  //     {
-  //       name: 'success',
-  //       icon: 'smile',
-  //       path: '/result/success',
-  //       component: './result/success',
-  //     },
-  //     {
-  //       name: 'fail',
-  //       icon: 'smile',
-  //       path: '/result/fail',
-  //       component: './result/fail',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'exception',
-  //   icon: 'warning',
-  //   path: '/exception',
-  //   routes: [
-  //     {
-  //       path: '/exception',
-  //       redirect: '/exception/403',
-  //     },
-  //     {
-  //       name: '403',
-  //       icon: 'smile',
-  //       path: '/exception/403',
-  //       component: './exception/403',
-  //     },
-  //     {
-  //       name: '404',
-  //       icon: 'smile',
-  //       path: '/exception/404',
-  //       component: './exception/404',
-  //     },
-  //     {
-  //       name: '500',
-  //       icon: 'smile',
-  //       path: '/exception/500',
-  //       component: './exception/500',
-  //     },
-  //   ],
-  // },
-  // {
-  //   name: 'account',
-  //   icon: 'user',
-  //   path: '/account',
-  //   routes: [
-  //     {
-  //       path: '/account',
-  //       redirect: '/account/center',
-  //     },
-  //     {
-  //       name: 'center',
-  //       icon: 'smile',
-  //       path: '/account/center',
-  //       component: './account/center',
-  //     },
-  //     {
-  //       name: 'settings',
-  //       icon: 'smile',
-  //       path: '/account/settings',
-  //       component: './account/settings',
-  //     },
-  //   ],
-  // },
   {
-    path: '/',
-    redirect: '/dashboard/analysis',
+    path: "/",
+    redirect: "/group",
   },
   {
-    component: '404',
-    path: '/*',
+    component: "404",
+    path: "/*",
   },
 ];
