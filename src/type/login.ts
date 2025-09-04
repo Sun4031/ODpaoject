@@ -10,6 +10,6 @@ export  interface LoginParams {
     /**
     * 号码国区
     */
-    phone_prefix: number;
+    phone_prefix: string;
 }
 

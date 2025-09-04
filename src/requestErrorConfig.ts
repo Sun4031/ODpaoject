@@ -89,7 +89,12 @@ export const errorConfig: RequestConfig = {
   requestInterceptors: [
     (config: RequestOptions) => {
       // 拦截请求配置，进行个性化处理。
-      const url = config?.url?.concat('?token=123');
+      const url = config?.url;
+      config.headers = {
+      ...config.headers, // 保留已有的 headers
+      'authorization-type': 'BASIC_AUTH', // 添加自定义请求头
+    };
+      
       return { ...config, url };
     },
   ],

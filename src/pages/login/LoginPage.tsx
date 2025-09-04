@@ -13,6 +13,7 @@ import {
   useIntl,
   useModel,
 } from '@umijs/max';
+import { LoginByAdmin } from '@/services/login';
 import LogoPng from '@/assets/image/logo.png'
 import { Alert, App, Tabs } from 'antd';
 import { createStyles } from 'antd-style';
@@ -101,11 +102,18 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleSubmit = (values: any) => {
-    console.log(values);
+  const handleSubmit = async (values: any) => {
+    const loginForm = {
+      phone: '55556666',
+      password: '1234qwer',
+      prefix: '39'
+    }
     if (type === 'account') {
-      window.location.href = '/group';
-    }else{
+       LoginByAdmin(loginForm).then((res) => {
+            console.log(res);
+          })
+      // window.location.href = '/group';
+    } else {
       window.location.href = '/merchant';
     }
 
