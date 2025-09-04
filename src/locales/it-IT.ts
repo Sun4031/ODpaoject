@@ -1,4 +1,4 @@
-import pages from './zh-CN/pages';
+import pages from './it-IT/pages';
 export default {
   'navBar.lang': '语言',
   'layout.user.link.help': '帮助',
