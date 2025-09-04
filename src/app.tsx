@@ -30,17 +30,26 @@ export async function getInitialState(): Promise<{
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
-    try {
-      const msg = await queryCurrentUser({
-        skipErrorHandler: true,
-      });
-      console.log('ppp',msg);
-      
-      return msg.data;
-    } catch (_error) {
-      history.push(loginPath);
+    return {
+      name: '张三',
+      avatar: 'avatar',
+      userid: '999',
+      email: '163@163.com',
+      signature: 'signature',
+      title: 'title',
+      group: 'group',
+      tags: { key: 'tagskey', label: 'tagsname'},
+      notifyCount: 199,
+      unreadCount: 200,
+      country: 'country',
+      access: 'access',
+      geographic: {
+        province: { label: 'provincelable', key: 'provincekey' },
+        city: { label: 'citylabel', key: 'citykey' },
+      },
+      address: '地址',
+      phone: '18888888888',
     }
-    return undefined;
   };
   // 如果不是登录页面，执行
   const { location } = history;
@@ -112,11 +121,11 @@ export const layout: RunTimeLayoutConfig = ({
     ],
     links: isDev
       ? [
-          <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
-            <LinkOutlined />
-            <span>OpenAPI 文档</span>
-          </Link>,
-        ]
+        <Link key="openapi" to="/umi/plugin/openapi" target="_blank">
+          <LinkOutlined />
+          <span>OpenAPI 文档</span>
+        </Link>,
+      ]
       : [],
     menuHeaderRender: undefined,
     // 自定义 403 页面

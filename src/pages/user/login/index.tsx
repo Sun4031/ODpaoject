@@ -130,32 +130,8 @@ const Login: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (values: API.LoginParams) => {
-    try {
-      // 登录
-      const msg = await login({ ...values, type });
-      if (msg.status === 'ok') {
-        const defaultLoginSuccessMessage = intl.formatMessage({
-          id: 'pages.login.success',
-          defaultMessage: '登录成功！',
-        });
-        message.success(defaultLoginSuccessMessage);
-        await fetchUserInfo();
-        const urlParams = new URL(window.location.href).searchParams;
-        window.location.href = urlParams.get('redirect') || '/';
-        return;
-      }
-      console.log(msg);
-      // 如果失败去设置用户错误信息
-      setUserLoginState(msg);
-    } catch (error) {
-      const defaultLoginFailureMessage = intl.formatMessage({
-        id: 'pages.login.failure',
-        defaultMessage: '登录失败，请重试！',
-      });
-      console.log(error);
-      message.error(defaultLoginFailureMessage);
-    }
+  const handleSubmit =  () => {
+    window.location.href = '/';
   };
   const { status, type: loginType } = userLoginState;
 
@@ -199,7 +175,7 @@ const Login: React.FC = () => {
             <ActionIcons key="icons" />,
           ]}
           onFinish={async (values) => {
-            await handleSubmit(values as API.LoginParams);
+            await handleSubmit();
           }}
         >
           <Tabs
