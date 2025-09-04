@@ -1,5 +1,4 @@
 import type { ProLayoutProps } from '@ant-design/pro-components';
-
 /**
  * @name
  */
@@ -15,7 +14,7 @@ const Settings: ProLayoutProps & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: 'Ordelivery 商家管理后台',
   pwa: true,
   logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
   iconfontUrl: '',
