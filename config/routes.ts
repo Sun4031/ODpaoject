@@ -18,39 +18,42 @@ export default [
     component: "./login/LoginPage",
   },
   {
-    path: "/merchant",
-    layout: false,
-    name: "MerchantPage",
-    component: "./merchant/MerchantPage",
-  },
-  {
     name: "集团管理",
     icon: "ApartmentOutlined",
     path: "/group",
     component: "./groupManagement/GroupManagementPage",
+    access: 'adminRouteFilter'
+
   },
   {
     name: "此账号",
     icon: "UserOutlined",
     path: "/account",
     component: "./thisAccount/ThisAccountPage",
+    access: 'adminRouteFilter'
+
   },
   {
     name: "被删除的资源",
     icon: "DeleteOutlined",
     path: "/recycleBin",
     component: "./recycleBin/RecycleBinPage",
+    access: 'adminRouteFilter'
+
   },
   {
     name: "客户管理",
     icon: "UsergroupAddOutlined",
     path: "/customer",
     component: "./customerManagement/CustomerPage",
+    access: 'adminRouteFilter'
+
   },
   {
     path: "/setting",
     name: "设置",
     icon: "SettingOutlined",
+    access: 'adminRouteFilter',
     routes: [
       {
         path: "/setting",
@@ -70,6 +73,86 @@ export default [
         name: "Whats App 设置",
         path: "/setting/whatsapp",
         component: "./settingMoudle/WhatsApp",
+      },
+    ],
+  },
+  {
+    path: "/merchant",
+    layout: false,
+    name: "MerchantPage",
+    component: "./merchant/MerchantPage",
+    access: 'normalRouteFilter',
+  },
+  {
+    path: "/order",
+    name: "订单",
+    icon: "SettingOutlined",
+    access: 'normalRouteFilter',
+    routes: [
+      {
+        path: "/order",
+        redirect: "/order/list",
+      },
+      {
+        name: "订单",
+        path: "/order/list",
+        component: "./order/OrderPage",
+      },
+      {
+        name: "预定订单",
+        path: "/order/reserve",
+        component: "./order/ReservePage",
+      },
+    ],
+  },
+  {
+    path: "/menu",
+    name: "菜单",
+    icon: "SettingOutlined",
+    access: 'normalRouteFilter',
+    routes: [
+      {
+        name: "菜单管理",
+        path: "/menu/list",
+        component: "./menu/MenuManagement",
+      },
+      {
+        name: "套餐&包餐小类设置",
+        path: "/menu/combo",
+        component: "./menu/Combo",
+      },
+      {
+        name: "调味品组",
+        path: "/menu/condiment",
+        component: "./menu/Condiment",
+      },
+    ],
+  },
+  {
+    path: "/shop",
+    name: "店铺",
+    icon: "SettingOutlined",
+    access: 'normalRouteFilter',
+    routes: [
+      {
+        name: "我的餐厅",
+        path: "/shop/myrestaurant",
+        component: "./shop/MyRestaurant",
+      },
+      {
+        name: "外卖业务营业时间",
+        path: "/shop/takeout",
+        component: "./shop/Takeout",
+      },
+      {
+        name: "预定业务营业时间",
+        path: "/shop/businessHours",
+        component: "./shop/BusinessHours",
+      },
+      {
+        name: "桌台设置",
+        path: "/shop/tablesetting",
+        component: "./shop/TableSetting",
       },
     ],
   },
