@@ -34,3 +34,22 @@ export const loginByAdmin = (option: LoginParams) =>
  */
 export const loginByBusiness = (option: LoginParams) =>
   loginRequest('/staff/auth/token', option);
+
+
+/**
+ * 登录成功根据令牌置换信息并缓存
+ */
+export const fetchUserInfoByToken = async () => {
+    return request('/auth/token/metadata', {
+    method: 'GET',
+  });
+}
+
+/**
+ * 获取用户头像
+ */
+export const getUserAvatar = async () => {
+    return request('/staff/609df6ec878fecdb17c53821/avatar', {
+    method: 'GET',
+  });
+}

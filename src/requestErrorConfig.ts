@@ -93,6 +93,7 @@ export const errorConfig: RequestConfig = {
       config.headers = {
         ...config.headers, // 保留已有的 headers
         'authorization-type': 'BASIC_AUTH', // 添加自定义请求头
+        'authorization': `Bearer ${sessionStorage.getItem('authorizationToken')}`,
       };
       config.url = `/${version}${config.url}`;
       return { ...config };

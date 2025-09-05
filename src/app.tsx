@@ -2,6 +2,7 @@ import type { Settings as LayoutSettings } from '@ant-design/pro-components';
 import { SettingDrawer } from '@ant-design/pro-components';
 import type { RequestConfig, RunTimeLayoutConfig } from '@umijs/max';
 import { history } from '@umijs/max';
+import { message } from 'antd';
 import {
   AvatarDropdown,
   AvatarName,
@@ -10,70 +11,91 @@ import {
 import defaultSettings from '../config/defaultSettings';
 import { errorConfig } from './requestErrorConfig';
 import '@ant-design/v5-patch-for-react-19';
+import {
+  fetchUserInfoByToken,
+  getUserAvatar
+} from "@/services/login";
 
-const isDev =
-  process.env.NODE_ENV === 'development' || process.env.CI;
-const loginPath = '/login';
-
-/**
- * @see https://umijs.org/docs/api/runtime-config#getinitialstate
- * */
-export async function getInitialState(): Promise<{
+// 类型定义
+type InitialState = {
   settings?: Partial<LayoutSettings>;
   currentUser?: API.CurrentUser;
   loading?: boolean;
-  fetchUserInfo?: any;
-}> {
-  const fetchUserInfo = async () => {
+  fetchUserInfo?: () => Promise<API.CurrentUser>;
+};
+const isDev = process.env.NODE_ENV === 'development' || process.env.CI;
+const loginPath = '/login';
+
+// 用户信息获取服务
+const fetchUserServices = async () => {
+  try {
+    // 并行请求用户信息和头像
+    const [userInfoRes, avatarRes] = await Promise.all([
+      fetchUserInfoByToken(),
+      getUserAvatar()
+    ]);
+    
     return {
-      name: '张三',
-      avatar: 'avatar',
-      userid: '999',
-      email: '163@163.com',
-      signature: 'signature',
-      title: 'title',
-      group: 'group',
-      tags: { key: 'tagskey', label: 'tagsname'},
-      notifyCount: 199,
-      unreadCount: 200,
-      country: 'country',
-      access: 'access',
-      geographic: {
-        province: { label: 'provincelable', key: 'provincekey' },
-        city: { label: 'citylabel', key: 'citykey' },
-      },
-      address: '地址',
-      phone: '18888888888',
-    }
-  };
-  // 如果不是登录页面，执行
-  const { location } = history;
-  if (
-    ![loginPath].includes(
-      location.pathname,
-    )
-  ) {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: defaultSettings as Partial<LayoutSettings>,
+      ...userInfoRes,
+      avatar: avatarRes
     };
+  } catch (error) {
+    message.error('获取用户信息失败');
+    throw error;
   }
+};
+
+/**
+ * 获取初始状态
+ */
+export async function getInitialState(): Promise<InitialState> {
+  const { location } = history;
+  
+  // 非登录页需要验证登录状态
+  const isLoginPage = location.pathname === loginPath;
+  
+  // 获取用户信息
+  const fetchUserInfo = async () => {
+    const user = await fetchUserServices();
+    return user;
+  };
+
+  // 如果不是登录页面，强制获取用户信息
+  if (!isLoginPage) {
+    try {
+      const user = await fetchUserInfo();
+      return {
+        fetchUserInfo,
+        currentUser: user,
+        settings: defaultSettings as Partial<LayoutSettings>,
+        loading: false
+      };
+    } catch {
+      // 获取失败时保持登录状态检查
+      return {
+        fetchUserInfo,
+        settings: defaultSettings as Partial<LayoutSettings>,
+        loading: false
+      };
+    }
+  }
+  
   return {
     fetchUserInfo,
     settings: defaultSettings as Partial<LayoutSettings>,
+    loading: false
   };
 }
 
-// ProLayout 支持的api https://procomponents.ant.design/components/layout
+/**
+ * 布局配置
+ */
 export const layout: RunTimeLayoutConfig = ({
   initialState,
   setInitialState,
 }) => {
   return {
     actionsRender: () => [
-      // <Question key="doc" />,
       <SelectLang key="SelectLang" />,
     ],
     avatarProps: {
@@ -88,8 +110,10 @@ export const layout: RunTimeLayoutConfig = ({
     },
     onPageChange: () => {
       const { location } = history;
-      // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== loginPath) {
+      
+      // 登录状态检查逻辑
+      if (!initialState?.currentUser && !initialState?.loading && 
+          location.pathname !== loginPath) {
         history.push(loginPath);
       }
     },
@@ -114,11 +138,7 @@ export const layout: RunTimeLayoutConfig = ({
       },
     ],
     menuHeaderRender: undefined,
-    // 自定义 403 页面
-    // unAccessible: <div>unAccessible</div>,
-    // 增加一个 loading 的状态
     childrenRender: (children) => {
-      // if (initialState?.loading) return <PageLoading />;
       return (
         <>
           {children}
@@ -143,9 +163,7 @@ export const layout: RunTimeLayoutConfig = ({
 };
 
 /**
- * @name request 配置，可以配置错误处理
- * 它基于 axios 和 ahooks 的 useRequest 提供了一套统一的网络请求和错误处理方案。
- * @doc https://umijs.org/docs/max/request#配置
+ * 请求配置
  */
 export const request: RequestConfig = {
   baseURL: 'https://dev-test-qftech-yennefer-be.evophotic.com/',

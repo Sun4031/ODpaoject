@@ -23,60 +23,34 @@ export default [
     name: "MerchantPage",
     component: "./merchant/MerchantPage",
   },
-  // {
-  //   path: "/user",
-  //   layout: false,
-  //   routes: [
-  //     {
-  //       path: "/user/login",
-  //       layout: false,
-  //       name: "login",
-  //       component: "./login/LoginPage",
-  //     },
-  //     {
-  //       path: "/user/merchant",
-  //       layout: false,
-  //       name: "MerchantPage",
-  //       component: "./merchant/MerchantPage",
-  //     },
-  //     {
-  //       path: "/user",
-  //       redirect: "/user/login",
-  //     },
-  //     {
-  //       component: "404",
-  //       path: "/user/*",
-  //     },
-  //   ],
-  // },
   {
     name: "集团管理",
-    icon: "dashboard",
+    icon: "ApartmentOutlined",
     path: "/group",
     component: "./groupManagement/GroupManagementPage",
   },
   {
     name: "此账号",
-    icon: "dashboard",
+    icon: "UserOutlined",
     path: "/account",
     component: "./thisAccount/ThisAccountPage",
   },
   {
     name: "被删除的资源",
-    icon: "dashboard",
+    icon: "DeleteOutlined",
     path: "/recycleBin",
     component: "./recycleBin/RecycleBinPage",
   },
   {
     name: "客户管理",
-    icon: "dashboard",
+    icon: "UsergroupAddOutlined",
     path: "/customer",
     component: "./customerManagement/CustomerPage",
   },
   {
     path: "/setting",
     name: "设置",
-    icon: "dashboard",
+    icon: "SettingOutlined",
     routes: [
       {
         path: "/setting",
@@ -84,19 +58,16 @@ export default [
       },
       {
         name: "基础设置",
-        icon: "smile",
         path: "/setting/basicSetting",
         component: "./settingMoudle/BasicSettings",
       },
       {
         name: "Viva Wallet 设置",
-        icon: "smile",
         path: "/setting/vivawallet",
         component: "./settingMoudle/VivaWallet",
       },
       {
         name: "Whats App 设置",
-        icon: "smile",
         path: "/setting/whatsapp",
         component: "./settingMoudle/WhatsApp",
       },
@@ -104,7 +75,7 @@ export default [
   },
   {
     path: "/",
-    redirect: "/group",
+    redirect: "/login",
   },
   {
     component: "404",

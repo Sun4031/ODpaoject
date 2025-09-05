@@ -20,7 +20,7 @@ export type GlobalHeaderRightProps = {
 export const AvatarName = () => {
   const { initialState } = useModel('@@initialState');
   const { currentUser } = initialState || {};
-  return <span className="anticon">{currentUser?.name}</span>;
+  return <span className="anticon">{currentUser?.first_name}</span>;
 };
 
 const useStyles = createStyles(({ token }) => {
@@ -57,9 +57,9 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
     /** 此方法会跳转到 redirect 参数所在的位置 */
     const redirect = urlParams.get('redirect');
     // Note: There may be security issues, please note
-    if (window.location.pathname !== '/user/login' && !redirect) {
+    if (window.location.pathname !== '/login' && !redirect) {
       history.replace({
-        pathname: '/user/login',
+        pathname: '/login',
         search: searchParams.toString(),
       });
     }
@@ -98,7 +98,7 @@ export const AvatarDropdown: React.FC<GlobalHeaderRightProps> = ({
 
   const { currentUser } = initialState;
 
-  if (!currentUser || !currentUser.name) {
+  if (!currentUser || !currentUser.first_name) {
     return loading;
   }
 
