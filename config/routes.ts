@@ -74,7 +74,8 @@ export default [
   },
   {
     path: '/merchant',
-    layout: false,
+    menuRender: false,
+     hideInMenu: true,
     name: 'MerchantPage',
     component: './merchant/MerchantPage',
     access: 'normalRouteFilter',
