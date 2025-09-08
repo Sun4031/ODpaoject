@@ -29,12 +29,13 @@ const loginPath = '/login';
 // 用户信息获取服务
 const fetchUserServices = async () => {
   try {
-    // 并行请求用户信息和头像
-    const [userInfoRes, avatarRes] = await Promise.all([
-      fetchUserInfoByToken(),
-      getUserAvatar()
-    ]);
-    
+    // 先获取用户信息
+    const userInfoRes = await fetchUserInfoByToken();
+
+    //使用用户ID获取头像
+    const avatarRes = await getUserAvatar(userInfoRes._id);
+
+    // 3. 返回合并后的结果
     return {
       ...userInfoRes,
       avatar: avatarRes
