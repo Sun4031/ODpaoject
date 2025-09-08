@@ -48,8 +48,8 @@ export const fetchUserInfoByToken = async () => {
 /**
  * 获取用户头像
  */
-export const getUserAvatar = async () => {
-    return request('/staff/609df6ec878fecdb17c53821/avatar', {
+export const getUserAvatar = async (id:string) => {
+    return request(`/staff/${id}/avatar`, {
     method: 'GET',
   });
 }
