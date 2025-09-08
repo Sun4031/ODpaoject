@@ -1,48 +1,67 @@
-
-import { EllipsisOutlined } from '@ant-design/icons';
-import { PageContainer, ProCard } from '@ant-design/pro-components';
-import { Button, Dropdown } from 'antd';
-import { useState } from 'react';
+import { nanoid, PageContainer, ProCard } from '@ant-design/pro-components';
+import { useState, useEffect } from 'react';
+import {
+    useModel,
+} from "@umijs/max";
 import './merchant.less';
+import { getMerchantData } from '@/services/merchant';
+import { GroupInfoData,RestaurantInfoData } from '@/type/merchantType';
+import { message } from 'antd';
+
 const MerchantPage = () => {
+    const { initialState } = useModel("@@initialState");
+    const [loading, setLoading] = useState<boolean>(false);
     const [showMoudle, setShowMoudle] = useState<string>('restaurant');
-    const navigate = () => {
-        window.location.href = '/order';
-    }
+    //餐厅列表
+    const [restaurantList, setRestaurantList] = useState<RestaurantInfoData[]>([]);
+    //所属集团信息
+    const [groupInfo, setGroupInfo] = useState<GroupInfoData>({} as GroupInfoData);
+
+    //功能数据
     const domainList = [
-        {
-            name: '集团信息'
-        },
-        {
-            name: '餐厅管理'
-        },
-        {
-            name: '账号管理'
-        },
-        {
-            name: '授权管理'
-        },
-        {
-            name: '骑手管理'
-        },
-    ]
-    const restaurantList = [
-        {
-            name: '喵星集团',
-        },
-        {
-            name: '迪士尼游乐场',
-        },
-    ]
+        { name: '集团信息', _id: nanoid() },
+        { name: '餐厅管理', _id: nanoid() },
+        { name: '账号管理', _id: nanoid() },
+        { name: '授权管理', _id: nanoid() },
+        { name: '骑手管理', _id: nanoid() },
+    ];
+
+    //获取当前用户下的餐厅
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const res = await getMerchantData(initialState?.currentUser?._id);
+            console.log('Fetched data:', res);
+            if (res.belonged_restaurant) {
+                message.success('获取成功')
+                setRestaurantList(res.belonged_restaurant);
+                setGroupInfo(res.belonged_group[0] || {})
+            } else {
+                message.error('获取失败')
+            }
+        } catch (error) {
+            message.error('请求异常')
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchData();
+    }, []);
+
+
+    //跳转
+    const navigate = () => {
+        // window.location.href = '/order';
+    };
+
     return (
-        <div
-            style={{
-                background: '#F5F7FA',
-            }}
-        >
+        <div className='bg-color'>
             <PageContainer
+                loading={loading}
                 header={{
-                    title: false,
+                    title: groupInfo.nickname || false,
                     ghost: true,
                 }}
                 tabList={[
@@ -60,35 +79,37 @@ const MerchantPage = () => {
                 onTabChange={(key: string) => setShowMoudle(key)}
             >
                 {showMoudle === 'domain' ? (
-                    <>
-                        <ProCard ghost gutter={8}>
-                            {
-                                domainList.map((item) => (
-                                    <ProCard className='active_style'  colSpan={4} layout="center" bordered key={item.name}>
-                                        {item.name}
-                                    </ProCard>
-                                ))
-                            }
-                        </ProCard>
-                    </>
+                    <ProCard ghost gutter={8}>
+                        {domainList.map((item) => (
+                            <ProCard
+                                className='active_style'
+                                colSpan={4}
+                                layout="center"
+                                bordered
+                                key={item._id}
+                            >
+                                {item.name}
+                            </ProCard>
+                        ))}
+                    </ProCard>
                 ) : (
-                    <>
-                        <ProCard ghost gutter={8}>
-                            {
-                                restaurantList.map((item) => (
-                                    <ProCard className='active_style' colSpan={4} layout="center" bordered key={item.name}>
-                                        {item.name}
-                                    </ProCard>
-                                ))
-                            }
-                        </ProCard>
-                    </>
+                    <ProCard ghost gutter={8}>
+                        {restaurantList.map((item) => (
+                            <ProCard
+                                className='active_style'
+                                colSpan={4}
+                                layout="center"
+                                bordered
+                                key={item._id}
+                            >
+                                {item.nickname}
+                            </ProCard>
+                        ))}
+                    </ProCard>
                 )}
             </PageContainer>
         </div>
-    )
-}
+    );
+};
+
 export default MerchantPage;
-
-
-
