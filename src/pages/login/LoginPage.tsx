@@ -382,7 +382,7 @@ const handleSubmit = async (values: any) => {
             }}
             placeholder={intl.formatMessage({
               id: "pages.login.password.placeholder",
-              defaultMessage: "密码: ant.design",
+              defaultMessage: "密码",
             })}
             rules={[
               {

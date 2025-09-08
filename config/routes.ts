@@ -82,7 +82,7 @@ export default [
   {
     path: '/order',
     name: '订单',
-    icon: 'SettingOutlined',
+    icon: 'DatabaseOutlined',
     access: 'normalRouteFilter',
     routes: [
       {
@@ -104,7 +104,7 @@ export default [
   {
     path: '/menu',
     name: '菜单',
-    icon: 'SettingOutlined',
+    icon: 'MenuOutlined',
     access: 'normalRouteFilter',
     routes: [
       {
@@ -127,7 +127,7 @@ export default [
   {
     path: '/shop',
     name: '店铺',
-    icon: 'SettingOutlined',
+    icon: 'ShopOutlined',
     access: 'normalRouteFilter',
     routes: [
       {
@@ -155,7 +155,7 @@ export default [
   {
     path: '/payment',
     name: '付款',
-    icon: 'SettingOutlined',
+    icon: 'PropertySafetyOutlined',
     access: 'normalRouteFilter',
     routes: [
       {
@@ -188,7 +188,7 @@ export default [
   {
     path: '/marketing',
     name: '营销',
-    icon: 'SettingOutlined',
+    icon: 'RiseOutlined',
     access: 'normalRouteFilter',
     routes: [
       {
@@ -216,7 +216,7 @@ export default [
   {
     path: '/analytics',
     name: '分析',
-    icon: 'SettingOutlined',
+    icon: 'AreaChartOutlined',
     access: 'normalRouteFilter',
     routes: [
       {
@@ -272,7 +272,7 @@ export default [
   {
     path: '/subfeaturemanagement',
     name: '子功能设置',
-    icon: 'SettingOutlined',
+    icon: 'ClusterOutlined',
     access: 'normalRouteFilter',
     routes: [
       {
