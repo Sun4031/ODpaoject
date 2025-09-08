@@ -75,9 +75,17 @@ export default [
   {
     path: '/merchant',
     menuRender: false,
-     hideInMenu: true,
+    hideInMenu: true,
     name: 'MerchantPage',
     component: './merchant/MerchantPage',
+    access: 'normalRouteFilter',
+  },
+  {
+    path: '/groupinfo',
+    menuRender: false,
+    hideInMenu: true,
+    name: 'GroupInformationPage',
+    component: './group/GroupInformationPage',
     access: 'normalRouteFilter',
   },
   {

@@ -54,6 +54,10 @@ const MerchantPage = () => {
         window.location.href = '/order';
     };
 
+    //功能跳转
+    const NavigateToDomain = () => {
+        window.location.href = '/groupinfo';
+    }
     return (
         <div className='bg-color'>
             <PageContainer
@@ -85,6 +89,7 @@ const MerchantPage = () => {
                                 layout="center"
                                 bordered
                                 key={item._id}
+                                onClick={NavigateToDomain}
                             >
                                 {item.name}
                             </ProCard>
