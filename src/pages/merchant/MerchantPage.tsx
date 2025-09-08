@@ -16,7 +16,6 @@ const MerchantPage = () => {
     const [restaurantList, setRestaurantList] = useState<RestaurantInfoData[]>([]);
     //所属集团信息
     const [groupInfo, setGroupInfo] = useState<GroupInfoData>({} as GroupInfoData);
-
     //功能数据
     const domainList = [
         { name: '集团信息', _id: nanoid() },
@@ -31,7 +30,6 @@ const MerchantPage = () => {
         setLoading(true);
         try {
             const res = await getMerchantData(initialState?.currentUser?._id);
-            console.log('Fetched data:', res);
             if (res.belonged_restaurant) {
                 message.success('获取成功')
                 setRestaurantList(res.belonged_restaurant);
@@ -52,8 +50,8 @@ const MerchantPage = () => {
 
 
     //跳转
-    const navigate = () => {
-        // window.location.href = '/order';
+    const NavigateToPage = () => {
+        window.location.href = '/order';
     };
 
     return (
@@ -101,6 +99,7 @@ const MerchantPage = () => {
                                 layout="center"
                                 bordered
                                 key={item._id}
+                                onClick={NavigateToPage}
                             >
                                 {item.nickname}
                             </ProCard>
